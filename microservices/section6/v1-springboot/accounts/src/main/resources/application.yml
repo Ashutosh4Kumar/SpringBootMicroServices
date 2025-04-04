@@ -1,0 +1,36 @@
+
+server:
+    port: 8080
+
+spring:
+  datasource:
+        url: jdbc:h2:mem:testdb
+        username: sa
+        password: ''
+  h2:
+    console:
+        enabled: true
+        path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+  profiles:
+    active:
+      - "prod"
+build:
+  version: "3.0"
+accounts:
+  message: "Welcome to Banking accounts related local APIs "
+  contactDetails:
+    name: "Ashutosh Bhardwaj - Developer"
+    email: "ashutosh@gmail.com"
+  onCallSupport:
+    - 828735678
+    - 24347097097
+

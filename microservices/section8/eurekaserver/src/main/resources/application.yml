@@ -3,3 +3,17 @@ spring:
     name: "eurekaserver"
   config:
     import: "optional:configserver:http://loaclhost:8071"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true

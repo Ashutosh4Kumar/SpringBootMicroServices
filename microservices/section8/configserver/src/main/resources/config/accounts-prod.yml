@@ -1,0 +1,10 @@
+build:
+  version: "1.0"
+accounts:
+  message: "Welcome to Banking Production accounts related Prod APIs "
+  contactDetails:
+    name: "Ashutosh Bhardwaj - Production"
+    email: "prod@gmail.com"
+  onCallSupport:
+    - 8287356788
+    - 24347097097

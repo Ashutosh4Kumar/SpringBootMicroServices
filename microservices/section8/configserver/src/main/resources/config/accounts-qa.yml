@@ -1,0 +1,11 @@
+
+build:
+  version: "2.0"
+accounts:
+  message: "Welcome to Banking QA accounts related QA APIs "
+  contactDetails:
+    name: "Ashutosh Bhardwaj - QA"
+    email: "qa@gmail.com"
+  onCallSupport:
+    - 8287356788
+    - 24347097097

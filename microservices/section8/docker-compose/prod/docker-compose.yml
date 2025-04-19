@@ -1,25 +1,8 @@
 services:
-#Rabbit server related configuration
-  rabbit:
-    image: rabbitmq:4.0-management
-    hostname: rabbit
-    ports:
-      - 5672:5672
-      - 15672:15672
-    healthcheck:
-      test: rabbitmq-diagnostics check_port_connectivity
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 5s
-    extends:
-      file: common-config.yml
-      service: network-deploy-service
-
 
 #Config server related configuration
   configserver:
-    image: "asbhardwaj/configserver:s6"
+    image: "asbhardwaj/configserver:s8"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -29,17 +12,34 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-    depends_on:
-      rabbit:
-        condition: service_healthy
     extends:
       file: common-config.yml
       service: microservice-base-config
+  eurekaserver:
+    image: "asbhardwaj/eurekaserver:s8"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+
 
 #Accounts related configuration
 
   accounts:
-    image: "asbhardwaj/accounts:s6"
+    image: "asbhardwaj/accounts:s8"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -52,7 +52,7 @@ services:
 #Loans related configuration
 
   loans:
-    image: "asbhardwaj/loans:s6"
+    image: "asbhardwaj/loans:s8"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -65,7 +65,7 @@ services:
 #Cards related configuration
 
   cards:
-    image: "asbhardwaj/cards:s6"
+    image: "asbhardwaj/cards:s8"
     container_name: cards-ms
     ports:
       - "9000:9000"

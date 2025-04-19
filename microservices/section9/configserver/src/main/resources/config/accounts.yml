@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+accounts:
+  message: "Welcome to Banking accounts related local APIs "
+  contactDetails:
+    name: "Ashutosh Bhardwaj - Developer"
+    email: "ashutosh@gmail.com"
+  onCallSupport:
+    - 828735678
+    - 24347097097
+
